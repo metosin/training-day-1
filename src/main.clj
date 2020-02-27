@@ -3,7 +3,7 @@
 (defn keep-odd
   "Returns a seq of odd numbers in input seq."
   [input-seq]
-  nil)
+  (filter #(and (number? %) (odd? %)) input-seq))
 
 (comment
   (assert (= [1 3 5 7 9] (keep-odd (range 10))))
@@ -14,7 +14,8 @@
    Returns a seq of the resulting integers.
    If the length of input seq is odd, the last input element is returned as-is."
   [input-seq]
-  nil)
+  (->> (partition 2 2 [0] input-seq)
+       (map #(apply + %))))
 
 (comment
   (assert (= [1 5 9 13] (pairwise-sum (range 8))))
@@ -24,7 +25,11 @@
   "Implements clojure.core/map using reduce.
    Supports a single coll instead of variable number of arguments."
   [map-fn coll]
-  nil)
+  (let [empty-coll (empty coll)]
+    (reduce
+      (fn [acc x] (concat acc (conj empty-coll (map-fn x))))
+      empty-coll
+      coll)))
 
 (comment
   (assert (= [1 2 3 4 5] (my-map inc (range 5))))
