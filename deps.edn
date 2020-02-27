@@ -1,2 +1,4 @@
 {:paths ["src"]
- :deps {nightlight {:mvn/version "RELEASE"}}}
+ :deps {nightlight {:mvn/version "RELEASE"}
+        http-kit {:mvn/version "2.3.0"}
+        metosin/jsonista {:mvn/version "0.2.5"}}}
