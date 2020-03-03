@@ -1,0 +1,18 @@
+{:http #profile{:dev {:server {:port 8080}}
+                :test {:server {:port 8081}}
+                :prod {:server {:port #long #env PORT}}}
+
+ :db-spec #profile{:dev {:uri "jdbc:postgresql://localhost:7432/event_app?user=event_app&password=event_app"}
+                   :test {:uri "jdbc:postgresql://localhost:7432/event_app_test?user=event_app_test&password=event_app_test"}
+                   :prod {:uri #env JDBC_DATABASE_URL}}
+
+ :system {:component/hikaricp {:db-spec ^:ref [:db-spec]}
+
+          :component/flyway {:db-spec ^:ref [:db-spec]
+                             :migrations {:files ["migrations"]
+                                          :schema "public"}}
+
+          :component/api-handler {:db #ig :component/hikaricp}
+
+          :duct.server.http/jetty {:handler #ig :component/api-handler
+                                   :port ^:ref [:http :server :port]}}}

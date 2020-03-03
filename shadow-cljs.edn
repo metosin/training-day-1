@@ -1,0 +1,19 @@
+{:lein {:profile "+cljs"}
+
+ :dev-http {8080 "public"}
+
+ :nrepl {:port 9876}
+
+ :builds
+ {:frontend {:target :browser
+             :output-dir "target/dev/resources/public/js"
+             :asset-path "js"
+             :modules {:main {:entries [main]}}
+             :compiler-options {:infer-externs :auto}
+             :source-map true
+             :module-loader true
+
+             :devtools {:watch-dir "target/dev/resources/public"}
+
+             :release {:output-dir "target/prod/resources/public/js"
+                       :compiler-options {:source-map "target/prod/resources/public/js/main.js.map"}}}}}

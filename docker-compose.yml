@@ -1,0 +1,15 @@
+version: '2'
+volumes:
+  pg:
+services:
+  postgres:
+    image: postgres:11-alpine
+    volumes:
+      - ./dev/docker/pg:/docker-entrypoint-initdb.d
+      - pg:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: event_app
+      POSTGRES_PASSWORD: event_app
+      POSTGRES_DB: event_app
+    ports:
+      - "7432:5432"
