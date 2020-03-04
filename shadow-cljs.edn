@@ -1,6 +1,6 @@
 {:lein {:profile "+cljs"}
 
- :dev-http {8080 "public"}
+ :dev-http {8082 "public"}
 
  :nrepl {:port 9876}
 
