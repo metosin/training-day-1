@@ -32,4 +32,5 @@
                                    [metosin/reitit-core "0.4.2"]
                                    [metosin/reitit-frontend "0.4.2"]
                                    [reagent "0.9.1"]
-                                   [re-frame "0.11.0"]]}})
+                                   [re-frame "0.11.0"]
+                                   [cljs-ajax "0.8.0"]]}})
