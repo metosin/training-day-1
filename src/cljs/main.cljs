@@ -4,13 +4,13 @@
             [reitit.frontend.easy :as rfe]
             [routing]
             [routes :refer [+routes+]]
-            [ajax.core :refer [GET]]))
+            [event]))
 
 (defn current-route
   []
   (when-let [route-match @(re-frame/subscribe [::routing/match])]
     (if-let [view-fn (get-in route-match [:data :view])]
-      [view-fn (:params view-fn)]
+      [view-fn]
       [:p "No view function defined for route."])))
 
 (defn click-me
@@ -30,25 +30,18 @@
 
 (defn event-table
   []
-  (let [data (reagent/atom events)]
-    (GET
-      "http://localhost:8080/api/event"
-      {:handler #(reset! data %)})
+  (let [data (re-frame/subscribe [:events/events])]
     (fn render []
        [:table.table
         [:thead
          [:tr
           [:th
            {:on-click
-            #(swap!
-               data
-               (fn [x] (sort-by :title x)))}
+            #(re-frame/dispatch [:events/sort :title])}
            "Title"]
           [:th
            {:on-click
-            #(swap!
-               data
-               (fn [x] (sort-by :description x)))}
+            #(re-frame/dispatch [:events/sort :description])}
            "Description"]]]
 
         [:tbody
