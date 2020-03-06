@@ -1,5 +1,9 @@
 # Clojure(Script) training with Metosin
 
+## EXAMPLE PROJECT
+
+Example project for an "event app" can be found in `event-app` branch.
+
 ## Before the training
 
 ### Register accounts
