@@ -1,5 +1,31 @@
 # Clojure(Script) training with Metosin
 
+## Running the example app
+
+### Start local Postgres DB in Docker 
+
+Start PostgreSQL in the background with Docker Compose:
+
+`docker-compose up -d`
+
+You can view the Postgres logs from Docker, assuming the container is running with the default name `training-day-1_postgres_1`:
+
+`docker logs training-day-1_postgres_1`
+
+### Start frontend compilation
+
+You need to either use `npx` to run ShadowCLJS, or install ShadowCLJS globally with `npm install -g shadow-cljs`. 
+
+Run `shadow-cljs watch frontend` to start the compilation, and make ShadowCLJS watch and recompile when you edit cljs source files.
+
+### Start the system and REPLs
+
+Open the backend REPL. Make sure the Leiningen profile `dev` is enabled in the REPL. Start the system with the REPL using `(go)`.
+
+Open frontend REPL. Connect the REPL to the browser with `(shadow/repl :frontend)`.
+
+The index HTML page is served by the backend. Fire up your browser and go to `localhost:8080`. Now, you can try to execute ClojureScript in the browser from the *frontend* REPL, e.g., `(js/alert "ALL HANDS ON DECK!")`.
+
 ## Before the training
 
 ### Register accounts
